@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class Gun : MonoBehaviour
 {
@@ -6,16 +7,46 @@ public class Gun : MonoBehaviour
     public float range = 100f;
     public float fireRate = 10f;
     public float impactForce = 100f;
+    public int maxAmmo = 10;
+    public float reloadTime = 3f;
+
+    private int currentAmmo;
 
     public Camera playerCamera;
     public ParticleSystem muzzleFlash;
     public GameObject impactEffect;
+    public Animator animator;
 
     private float nextTimeToFire = 0f;
+    private bool isReloading = false;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        currentAmmo = maxAmmo;
+    }
+
+    // OnEnable is called when re-enabling the object
+    void OnEnable()
+    {
+        isReloading = false;
+        animator.SetBool("Reloading", false);
+    }
 
     // Update is called once per frame
     void Update()
     {
+        if (isReloading == true)
+        {
+            return;
+        }
+
+        if (currentAmmo <= 0 || Input.GetKeyDown(KeyCode.R))
+        {
+            StartCoroutine(Reload());
+            return;
+        }
+
         if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire)
         {
             nextTimeToFire = Time.time + 1f / fireRate;
@@ -23,9 +54,30 @@ public class Gun : MonoBehaviour
         }
     }
 
+    IEnumerator Reload()
+    {
+        isReloading = true;
+
+        Debug.Log("Reloading");
+
+        animator.SetBool("Reloading", true);
+
+        yield return new WaitForSeconds(reloadTime);
+
+        currentAmmo = maxAmmo;
+
+        animator.SetBool("Reloading", false);
+
+        Debug.Log("Reloaded");
+
+        isReloading = false;
+    }
+
     void Shoot()
     {
         muzzleFlash.Play();
+
+        currentAmmo--;
 
         RaycastHit hit;
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, range))
