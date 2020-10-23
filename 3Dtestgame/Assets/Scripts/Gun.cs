@@ -12,10 +12,12 @@ public class Gun : MonoBehaviour
 
     private int currentAmmo;
 
+    public PlayerControl playerController;
     public Camera playerCamera;
     public ParticleSystem muzzleFlash;
     public GameObject impactEffect;
     public Animator animator;
+    public AmmoUI ammoHud;
 
     private float nextTimeToFire = 0f;
     private bool isReloading = false;
@@ -24,6 +26,7 @@ public class Gun : MonoBehaviour
     void Start()
     {
         currentAmmo = maxAmmo;
+        ammoHud.UpdateAmmoUI(currentAmmo, playerController.ammoCount);
     }
 
     // OnEnable is called when re-enabling the object
@@ -31,6 +34,7 @@ public class Gun : MonoBehaviour
     {
         isReloading = false;
         animator.SetBool("Reloading", false);
+        ammoHud.UpdateCurrentAmmo(currentAmmo);
     }
 
     // Update is called once per frame
@@ -43,7 +47,10 @@ public class Gun : MonoBehaviour
 
         if (currentAmmo <= 0 || Input.GetKeyDown(KeyCode.R))
         {
-            StartCoroutine(Reload());
+            if (playerController.ammoCount > 0)
+            {
+                StartCoroutine(Reload());
+            }
             return;
         }
 
@@ -57,14 +64,15 @@ public class Gun : MonoBehaviour
     IEnumerator Reload()
     {
         isReloading = true;
-
+        
         Debug.Log("Reloading");
 
         animator.SetBool("Reloading", true);
 
         yield return new WaitForSeconds(reloadTime);
 
-        currentAmmo = maxAmmo;
+        currentAmmo += playerController.SpendAmmo(maxAmmo - currentAmmo, false);
+        ammoHud.UpdateAmmoUI(currentAmmo, playerController.ammoCount);
 
         animator.SetBool("Reloading", false);
 
@@ -78,6 +86,7 @@ public class Gun : MonoBehaviour
         muzzleFlash.Play();
 
         currentAmmo--;
+        ammoHud.UpdateCurrentAmmo(currentAmmo);
 
         RaycastHit hit;
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, range))
