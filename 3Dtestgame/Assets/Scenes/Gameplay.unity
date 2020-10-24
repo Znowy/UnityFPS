@@ -5288,7 +5288,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3d799a37e933a9b4b92692fd55087b63, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5498,6 +5498,7 @@ GameObject:
   - component: {fileID: 519942633}
   - component: {fileID: 519942635}
   - component: {fileID: 519942636}
+  - component: {fileID: 519942637}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -5561,6 +5562,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 256
+  animator: {fileID: 519942637}
 --- !u!114 &519942636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5574,6 +5576,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ammoCount: 120
+--- !u!95 &519942637
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519942632}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c7cef7fafcf36d84fad0632bec0cb1fc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &534188243
 PrefabInstance:
   m_ObjectHideFlags: 0

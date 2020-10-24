@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
+    public Animator animator;
 
     Vector3 playerVelocity;
 
@@ -35,7 +36,16 @@ public class PlayerMovement : MonoBehaviour
 
         playerController.Move(move * moveSpeed * Time.deltaTime);
 
-        if(Input.GetButtonDown("Jump") && isGrounded)
+        if ((playerController.velocity.z != 0 || playerController.velocity.x != 0) && !animator.GetBool("Moving"))
+        {
+            animator.SetBool("Moving", true);
+        }
+        else if ((playerController.velocity.z == 0 || playerController.velocity.x == 0) && animator.GetBool("Moving"))
+        {
+            animator.SetBool("Moving", false);
+        }
+
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
