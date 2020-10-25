@@ -29,13 +29,16 @@ public class PlayerMovement : MonoBehaviour
             playerVelocity.y = -2f;
         }
 
+        #region Player Movement
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
         Vector3 move = transform.right * x + transform.forward * z;
 
         playerController.Move(move * moveSpeed * Time.deltaTime);
+        #endregion
 
+        #region Headbob Animation
         if ((playerController.velocity.z != 0 || playerController.velocity.x != 0) && !animator.GetBool("Moving"))
         {
             animator.SetBool("Moving", true);
@@ -44,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("Moving", false);
         }
+        #endregion
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
