@@ -6,9 +6,10 @@ public class PlayerMovement : MonoBehaviour
 {
     public CharacterController playerController;
 
-    public float moveSpeed = 10f;
+    public float moveSpeed = 5f;
     public float gravity = -9.81f;
     public float jumpHeight = 3f;
+    public bool headbob = true;
 
     public Transform groundCheck;
     public float groundDistance = 0.4f;
@@ -35,17 +36,39 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 move = transform.right * x + transform.forward * z;
 
-        playerController.Move(move * moveSpeed * Time.deltaTime);
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            playerController.Move(move * (moveSpeed * 2) * Time.deltaTime);
+            if (!animator.GetBool("Sprinting") && isGrounded)
+            {
+                animator.SetBool("Sprinting", true);
+            }
+            else if (!isGrounded)
+            {
+                animator.SetBool("Sprinting", false);
+            }
+        }
+        else
+        {
+            playerController.Move(move * moveSpeed * Time.deltaTime);
+            if (animator.GetBool("Sprinting"))
+            {
+                animator.SetBool("Sprinting", false);
+            }
+        }
         #endregion
 
         #region Headbob Animation
-        if ((playerController.velocity.z != 0 || playerController.velocity.x != 0) && !animator.GetBool("Moving"))
+        if (headbob)
         {
-            animator.SetBool("Moving", true);
-        }
-        else if ((playerController.velocity.z == 0 || playerController.velocity.x == 0) && animator.GetBool("Moving"))
-        {
-            animator.SetBool("Moving", false);
+            if ((playerController.velocity.z != 0 || playerController.velocity.x != 0) && !animator.GetBool("Moving"))
+            {
+                animator.SetBool("Moving", true);
+            }
+            else if ((playerController.velocity.z == 0 || playerController.velocity.x == 0) && animator.GetBool("Moving"))
+            {
+                animator.SetBool("Moving", false);
+            }
         }
         #endregion
 

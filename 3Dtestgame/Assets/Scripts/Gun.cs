@@ -13,6 +13,7 @@ public class Gun : MonoBehaviour
     private int currentAmmo;
 
     public PlayerControl playerController;
+    public Animator playerAnimator;
     public Camera playerCamera;
     public ParticleSystem muzzleFlash;
     public GameObject impactEffect;
@@ -47,14 +48,14 @@ public class Gun : MonoBehaviour
 
         if (currentAmmo <= 0 || Input.GetKeyDown(KeyCode.R))
         {
-            if (playerController.ammoCount > 0)
+            if (playerController.ammoCount > 0 && currentAmmo != maxAmmo)
             {
                 StartCoroutine(Reload());
             }
             return;
         }
 
-        if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire)
+        if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire && !playerAnimator.GetCurrentAnimatorStateInfo(1).IsName("Weapon_Sprinting"))
         {
             nextTimeToFire = Time.time + 1f / fireRate;
             Shoot();

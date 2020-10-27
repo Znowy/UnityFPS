@@ -5554,9 +5554,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 519942633}
-  moveSpeed: 10
+  moveSpeed: 5
   gravity: -19.62
   jumpHeight: 3
+  headbob: 1
   groundCheck: {fileID: 1956366232}
   groundDistance: 0.4
   groundMask:
@@ -5726,6 +5727,7 @@ MonoBehaviour:
   maxAmmo: 12
   reloadTime: 1
   playerController: {fileID: 519942636}
+  playerAnimator: {fileID: 519942637}
   playerCamera: {fileID: 963194227}
   muzzleFlash: {fileID: 2049509140}
   impactEffect: {fileID: 2259162000946563108, guid: 7c44e2e08e62cbf49a5db816299697e0, type: 3}
@@ -10911,6 +10913,7 @@ MonoBehaviour:
   maxAmmo: 5
   reloadTime: 4
   playerController: {fileID: 519942636}
+  playerAnimator: {fileID: 519942637}
   playerCamera: {fileID: 963194227}
   muzzleFlash: {fileID: 114693975}
   impactEffect: {fileID: 5311693842817717526, guid: 5ab0bbdbf020ce24e96bab85a1856a7e, type: 3}
@@ -11287,6 +11290,7 @@ MonoBehaviour:
   maxAmmo: 30
   reloadTime: 3
   playerController: {fileID: 519942636}
+  playerAnimator: {fileID: 519942637}
   playerCamera: {fileID: 963194227}
   muzzleFlash: {fileID: 1648664980}
   impactEffect: {fileID: 3582590208925281397, guid: 777e1ad565e21704cb7bb0254c7c3aa3, type: 3}
@@ -16536,6 +16540,7 @@ MonoBehaviour:
   maxAmmo: 10
   reloadTime: 5
   playerController: {fileID: 519942636}
+  playerAnimator: {fileID: 519942637}
   playerCamera: {fileID: 963194227}
   muzzleFlash: {fileID: 910450727}
   impactEffect: {fileID: 8821864573690878262, guid: 361d2d72416e6fc4bb9b9a1f8e430210, type: 3}
