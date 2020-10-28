@@ -6,17 +6,7 @@ public class PlayerControl : MonoBehaviour
 {
     public int ammoCount = 120;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public AmmoUI ammoHud;
 
     // If onlyUseIfMax is true, then ammo is only used if ammoSpent <= ammoCount
     public int SpendAmmo(int ammoSpent, bool onlyUseIfMax)
@@ -36,5 +26,11 @@ public class PlayerControl : MonoBehaviour
             }
         }
         return 0;
+    }
+
+    public void ReceiveAmmo(int ammoReceived)
+    {
+        ammoCount += ammoReceived;
+        ammoHud.UpdateAmmoCount(ammoCount);
     }
 }

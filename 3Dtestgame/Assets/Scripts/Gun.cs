@@ -20,6 +20,8 @@ public class Gun : MonoBehaviour
     public Animator animator;
     public AmmoUI ammoHud;
 
+    public SpawnTarget targetSpawner; // Temporary for testing
+
     private float nextTimeToFire = 0f;
     private bool isReloading = false;
 
@@ -59,6 +61,16 @@ public class Gun : MonoBehaviour
         {
             nextTimeToFire = Time.time + 1f / fireRate;
             Shoot();
+        }
+        
+        // Temporary for testing
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, range))
+            {
+                targetSpawner.SpawnWoodenCrate(hit.point, 100);
+            }
         }
     }
 
