@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
+    public float health = 100f;
     public int ammoCount = 120;
 
-    public AmmoUI ammoHud;
+    public PlayerUI playerHud;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        playerHud.healthHud.UpdateHealthUI(health);
+    }
 
     // If onlyUseIfMax is true, then ammo is only used if ammoSpent <= ammoCount
     public int SpendAmmo(int ammoSpent, bool onlyUseIfMax)
@@ -14,6 +21,7 @@ public class PlayerControl : MonoBehaviour
         if (ammoSpent <= ammoCount)
         {
             ammoCount -= ammoSpent;
+            playerHud.ammoHud.UpdateAmmoCount(ammoCount);
             return ammoSpent;
         }
         else if (!onlyUseIfMax)
@@ -22,6 +30,7 @@ public class PlayerControl : MonoBehaviour
             {
                 int ammoUsed = ammoCount;
                 ammoCount = 0;
+                playerHud.ammoHud.UpdateAmmoCount(ammoCount);
                 return ammoUsed;
             }
         }
@@ -31,6 +40,6 @@ public class PlayerControl : MonoBehaviour
     public void ReceiveAmmo(int ammoReceived)
     {
         ammoCount += ammoReceived;
-        ammoHud.UpdateAmmoCount(ammoCount);
+        playerHud.ammoHud.UpdateAmmoCount(ammoCount);
     }
 }

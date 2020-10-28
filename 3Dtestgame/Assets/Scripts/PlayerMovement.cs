@@ -7,7 +7,6 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController playerController;
 
     public float moveSpeed = 5f;
-    //public float gravity = -9.81f;
     public float jumpHeight = 3f;
     public bool headbob = true;
 
@@ -19,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 playerVelocity;
 
     bool isGrounded;
+    bool isSprinting;
 
     // Update is called once per frame
     void Update()
@@ -36,21 +36,30 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 move = transform.right * x + transform.forward * z;
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && isGrounded)
         {
+            isSprinting = true;
+
             playerController.Move(move * (moveSpeed * 2) * Time.deltaTime);
-            if (!animator.GetBool("Sprinting") && isGrounded)
+
+            if (!animator.GetBool("Sprinting"))
             {
                 animator.SetBool("Sprinting", true);
-            }
-            else if (!isGrounded)
-            {
-                animator.SetBool("Sprinting", false);
             }
         }
         else
         {
-            playerController.Move(move * moveSpeed * Time.deltaTime);
+            if (!isGrounded && isSprinting)
+            {
+                playerController.Move(move * (moveSpeed * 2) * Time.deltaTime);
+            }
+            else
+            {
+                isSprinting = false;
+
+                playerController.Move(move * moveSpeed * Time.deltaTime);
+            }
+
             if (animator.GetBool("Sprinting"))
             {
                 animator.SetBool("Sprinting", false);

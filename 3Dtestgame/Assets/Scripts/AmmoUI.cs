@@ -7,12 +7,12 @@ public class AmmoUI : MonoBehaviour
 
     public void UpdateAmmoUI(int currentAmmo, int ammoCount)
     {
-        ammoText.text = currentAmmo + "/" + ammoCount;
+        ammoText.text = ammoText.text.Substring(0, 6) + currentAmmo + "/" + ammoCount;
     }
 
     public void UpdateCurrentAmmo(int currentAmmo)
     {
-        ammoText.text = currentAmmo + "/" + ammoText.text.Substring(ammoText.text.IndexOf('/') + 1);
+        ammoText.text = ammoText.text.Substring(0, 6) + currentAmmo + "/" + ammoText.text.Substring(ammoText.text.IndexOf('/') + 1);
     }
 
     public void UpdateAmmoCount(int ammoCount)
