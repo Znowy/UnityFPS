@@ -9,11 +9,11 @@ public class Gun : MonoBehaviour
     public float impactForce = 100f;
     public int maxAmmo = 10;
     public float reloadTime = 3f;
-
-    private int currentAmmo;
+    public float recoilRate = 3f;
 
     public PlayerControl playerController;
     public Animator playerAnimator;
+    public MouseLook mouseLook;
     public Camera playerCamera;
     public ParticleSystem muzzleFlash;
     public GameObject impactEffect;
@@ -22,6 +22,7 @@ public class Gun : MonoBehaviour
 
     public SpawnTarget targetSpawner; // Temporary for testing
 
+    private int currentAmmo;
     private float nextTimeToFire = 0f;
     private bool isReloading = false;
 
@@ -61,6 +62,7 @@ public class Gun : MonoBehaviour
         {
             nextTimeToFire = Time.time + 1f / fireRate;
             Shoot();
+            mouseLook.Recoil(recoilRate);
         }
         
         // Temporary for testing

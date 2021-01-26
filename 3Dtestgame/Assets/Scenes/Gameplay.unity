@@ -5378,8 +5378,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 121805377}
-  - {fileID: 963194228}
   - {fileID: 1956366232}
+  - {fileID: 963194228}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5490,8 +5490,10 @@ MonoBehaviour:
   impactForce: 75
   maxAmmo: 12
   reloadTime: 1
+  recoilRate: 3
   playerController: {fileID: 519942636}
   playerAnimator: {fileID: 519942637}
+  mouseLook: {fileID: 963194229}
   playerCamera: {fileID: 963194227}
   muzzleFlash: {fileID: 2049509140}
   impactEffect: {fileID: 2259162000946563108, guid: 7c44e2e08e62cbf49a5db816299697e0, type: 3}
@@ -10691,8 +10693,10 @@ MonoBehaviour:
   impactForce: 1000
   maxAmmo: 5
   reloadTime: 4
+  recoilRate: 3
   playerController: {fileID: 519942636}
   playerAnimator: {fileID: 519942637}
+  mouseLook: {fileID: 963194229}
   playerCamera: {fileID: 963194227}
   muzzleFlash: {fileID: 114693975}
   impactEffect: {fileID: 5311693842817717526, guid: 5ab0bbdbf020ce24e96bab85a1856a7e, type: 3}
@@ -10728,8 +10732,8 @@ GameObject:
   m_Component:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
-  - component: {fileID: 963194226}
   - component: {fileID: 963194229}
+  - component: {fileID: 963194226}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -10795,13 +10799,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.766, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.76600003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1353850267}
   m_Father: {fileID: 519942634}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
@@ -11169,8 +11173,10 @@ MonoBehaviour:
   impactForce: 100
   maxAmmo: 30
   reloadTime: 3
+  recoilRate: 5
   playerController: {fileID: 519942636}
   playerAnimator: {fileID: 519942637}
+  mouseLook: {fileID: 963194229}
   playerCamera: {fileID: 963194227}
   muzzleFlash: {fileID: 1648664980}
   impactEffect: {fileID: 3582590208925281397, guid: 777e1ad565e21704cb7bb0254c7c3aa3, type: 3}
@@ -16524,8 +16530,10 @@ MonoBehaviour:
   impactForce: 200
   maxAmmo: 10
   reloadTime: 5
+  recoilRate: 5
   playerController: {fileID: 519942636}
   playerAnimator: {fileID: 519942637}
+  mouseLook: {fileID: 963194229}
   playerCamera: {fileID: 963194227}
   muzzleFlash: {fileID: 910450727}
   impactEffect: {fileID: 8821864573690878262, guid: 361d2d72416e6fc4bb9b9a1f8e430210, type: 3}
@@ -16579,7 +16587,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 519942634}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1959646921
 GameObject:

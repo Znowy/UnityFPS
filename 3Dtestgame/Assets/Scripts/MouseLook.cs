@@ -19,13 +19,25 @@ public class MouseLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Get mouse acis location and multiply it by the sensitivity and deltaTime(so framerate doesn't change speed).
+        // Get mouse axis location and multiply it by the sensitivity and deltaTime(so framerate doesn't change speed).
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
         playerBody.Rotate(Vector3.up * mouseX);
 
         xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+    }
+
+    public void Recoil(float recoilRate)
+    {
+        // Horizontal Recoil
+        playerBody.Rotate(Vector3.up * (Random.Range(-1, 2)) * recoilRate / 10);
+
+        // Vertical Recoil
+        xRotation -= recoilRate;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
