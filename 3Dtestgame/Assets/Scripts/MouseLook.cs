@@ -30,16 +30,4 @@ public class MouseLook : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
     }
-
-    public void Recoil(float recoilRate)
-    {
-        // Horizontal Recoil
-        playerBody.Rotate(Vector3.up * (Random.Range(-1, 2)) * recoilRate / 10);
-
-        // Vertical Recoil
-        xRotation -= recoilRate;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-    }
 }

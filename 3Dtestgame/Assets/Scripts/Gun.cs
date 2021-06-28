@@ -62,7 +62,6 @@ public class Gun : MonoBehaviour
         {
             nextTimeToFire = Time.time + 1f / fireRate;
             Shoot();
-            mouseLook.Recoil(recoilRate);
         }
         
         // Temporary for testing
