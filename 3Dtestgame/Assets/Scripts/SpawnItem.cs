@@ -8,7 +8,11 @@ public class SpawnItem : MonoBehaviour
 
     public void SpawnAmmoBox(Vector3 spawnPoint, int ammoGiven)
     {
-        GameObject AmmoBox = (GameObject)Instantiate(Resources.Load("Prefabs/AmmoBox"), spawnPoint, Quaternion.Euler(0, Random.Range(0f, 360f), 0));
-        AmmoBox.GetComponent<AmmoPickup>().playerController = playerController;
+        if (ammoGiven > 0)
+        {
+            GameObject AmmoBox = (GameObject)Instantiate(Resources.Load("Prefabs/AmmoBox"), spawnPoint, Quaternion.Euler(0, Random.Range(0f, 360f), 0));
+            AmmoBox.GetComponent<AmmoPickup>().playerController = playerController;
+            AmmoBox.GetComponent<AmmoPickup>().ammoGiven = ammoGiven;
+        }
     }
 }

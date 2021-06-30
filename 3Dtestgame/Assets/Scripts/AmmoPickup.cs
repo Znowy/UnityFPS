@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AmmoPickup : MonoBehaviour
 {
-    public int ammoGiven = 50;
+    public int ammoGiven;
 
     public PlayerControl playerController;
 
