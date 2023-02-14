@@ -41,15 +41,27 @@ public class Gun : MonoBehaviour
         playerHud.ammoHud.UpdateCurrentAmmo(currentAmmo);
     }
 
+    void OnReload()
+    {
+        if (playerController.ammoCount > 0 && currentAmmo != maxAmmo)
+        {
+            StartCoroutine(Reload());
+        }
+    }
+
+    void OnFire()
+    {
+        if (Time.time >= nextTimeToFire/* && !playerAnimator.GetCurrentAnimatorStateInfo(1).IsName("Weapon_Sprinting")*/)
+        {
+            nextTimeToFire = Time.time + 1f / fireRate;
+            Shoot();
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (isReloading == true)
-        {
-            return;
-        }
-
-        if (currentAmmo <= 0 || Input.GetKeyDown(KeyCode.R))
+        if (currentAmmo <= 0 && !isReloading)
         {
             if (playerController.ammoCount > 0 && currentAmmo != maxAmmo)
             {
@@ -57,13 +69,7 @@ public class Gun : MonoBehaviour
             }
             return;
         }
-
-        if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire && !playerAnimator.GetCurrentAnimatorStateInfo(1).IsName("Weapon_Sprinting"))
-        {
-            nextTimeToFire = Time.time + 1f / fireRate;
-            Shoot();
-        }
-        
+        /*
         // Temporary for testing
         if (Input.GetKeyDown(KeyCode.F))
         {
@@ -73,6 +79,7 @@ public class Gun : MonoBehaviour
                 targetSpawner.SpawnWoodenCrate(hit.point, 100);
             }
         }
+        */
     }
 
     IEnumerator Reload()
