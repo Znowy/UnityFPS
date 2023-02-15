@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class WeaponSwitching : MonoBehaviour
 {
@@ -10,13 +13,13 @@ public class WeaponSwitching : MonoBehaviour
         SelectWeapon();
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnWeaponSwap(InputValue value)
     {
         int previousWeapon = currentWeapon;
 
-        #region Select weapon with scroll wheel
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+        float scrollValue = value.Get<float>();
+
+        if (scrollValue > 0f)
         {
             if (currentWeapon >= transform.childCount - 1)
             {
@@ -27,8 +30,7 @@ public class WeaponSwitching : MonoBehaviour
                 currentWeapon++;
             }
         }
-
-        if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+        else if (scrollValue < 0f)
         {
             if (currentWeapon <= 0)
             {
@@ -39,10 +41,19 @@ public class WeaponSwitching : MonoBehaviour
                 currentWeapon--;
             }
         }
-        #endregion
 
+        if (currentWeapon != previousWeapon)
+        {
+            SelectWeapon();
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
         #region Select weapon with number keys (1-5)
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        /*if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             currentWeapon = 0;
         }
@@ -65,13 +76,9 @@ public class WeaponSwitching : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha5) && transform.childCount >= 5)
         {
             currentWeapon = 4;
-        }
+        }*/
         #endregion
 
-        if (currentWeapon != previousWeapon)
-        {
-            SelectWeapon();
-        }
     }
 
     void SelectWeapon()

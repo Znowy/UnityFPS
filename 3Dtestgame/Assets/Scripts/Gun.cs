@@ -1,5 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Gun : MonoBehaviour
 {
@@ -51,7 +53,7 @@ public class Gun : MonoBehaviour
 
     void OnFire()
     {
-        if (Time.time >= nextTimeToFire/* && !playerAnimator.GetCurrentAnimatorStateInfo(1).IsName("Weapon_Sprinting")*/)
+        if (Time.time >= nextTimeToFire)// && !playerAnimator.GetCurrentAnimatorStateInfo(1).IsName("Weapon_Sprinting") )
         {
             nextTimeToFire = Time.time + 1f / fireRate;
             Shoot();
