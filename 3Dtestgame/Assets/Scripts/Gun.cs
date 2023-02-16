@@ -27,6 +27,7 @@ public class Gun : MonoBehaviour
     private int currentAmmo;
     private float nextTimeToFire = 0f;
     private bool isReloading = false;
+    private bool isFiring = false;
 
     // Start is called before the first frame update
     void Start()
@@ -53,11 +54,7 @@ public class Gun : MonoBehaviour
 
     void OnFire()
     {
-        if (Time.time >= nextTimeToFire)// && !playerAnimator.GetCurrentAnimatorStateInfo(1).IsName("Weapon_Sprinting") )
-        {
-            nextTimeToFire = Time.time + 1f / fireRate;
-            Shoot();
-        }
+        isFiring = !isFiring;
     }
 
     // Update is called once per frame
@@ -71,6 +68,13 @@ public class Gun : MonoBehaviour
             }
             return;
         }
+
+        if (isFiring && Time.time >= nextTimeToFire && currentAmmo != 0 && !isReloading && !GetComponentInParent<PlayerMovement>().isSprinting)
+        {
+            nextTimeToFire = Time.time + 1f / fireRate;
+            Shoot();
+        }
+
         /*
         // Temporary for testing
         if (Input.GetKeyDown(KeyCode.F))

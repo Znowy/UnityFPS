@@ -19,8 +19,8 @@ public class PlayerMovement : MonoBehaviour
     Vector3 playerGravityVelocity;
     Vector2 playerMovement;
 
-    bool isGrounded;
-    bool isSprinting;
+    public bool isGrounded;
+    public bool isSprinting;
 
     // Start is called before the first frame update
     void Start()
