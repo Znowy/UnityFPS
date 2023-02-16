@@ -13,7 +13,7 @@ public class WeaponSwitching : MonoBehaviour
         SelectWeapon();
     }
 
-    void OnWeaponSwap(InputValue value)
+    void OnWeaponScroll(InputValue value)
     {
         int previousWeapon = currentWeapon;
 
@@ -48,36 +48,21 @@ public class WeaponSwitching : MonoBehaviour
         }
     }
 
+    void OnWeaponSelect(InputValue value)
+    {
+        int previousWeapon = currentWeapon;
+
+        currentWeapon = (int)value.Get<float>() - 1;
+
+        if (currentWeapon != previousWeapon)
+        {
+            SelectWeapon();
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-        
-        #region Select weapon with number keys (1-5)
-        /*if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            currentWeapon = 0;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2) && transform.childCount >= 2)
-        {
-            currentWeapon = 1;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha3) && transform.childCount >= 3)
-        {
-            currentWeapon = 2;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha4) && transform.childCount >= 4)
-        {
-            currentWeapon = 3;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha5) && transform.childCount >= 5)
-        {
-            currentWeapon = 4;
-        }*/
-        #endregion
 
     }
 

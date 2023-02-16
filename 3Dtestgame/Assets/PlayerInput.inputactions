@@ -60,13 +60,22 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "WeaponSwap",
+                    "name": "WeaponScroll",
                     "type": "Value",
                     "id": "a429e459-7395-412a-b058-64bd2588fb81",
                     "expectedControlType": "Analog",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "WeaponSelect",
+                    "type": "Button",
+                    "id": "7e003184-3800-44c6-a0b0-7deea395674a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -330,7 +339,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WeaponSwap",
+                    "action": "WeaponScroll",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -341,7 +350,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "WeaponSwap",
+                    "action": "WeaponScroll",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -352,9 +361,53 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "WeaponSwap",
+                    "action": "WeaponScroll",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "c28535fb-ca2e-4178-a906-5ca9e4c7f65b",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "Scale",
+                    "groups": "Keyboard&Mouse",
+                    "action": "WeaponSelect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2bcb6b3e-27b9-4739-838e-a72853a4d3a6",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "Scale(factor=2)",
+                    "groups": "Keyboard&Mouse",
+                    "action": "WeaponSelect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "55a99197-99d6-4fdb-a93d-9f5aa7bb3a3e",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "Scale(factor=3)",
+                    "groups": "Keyboard&Mouse",
+                    "action": "WeaponSelect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9422d747-8fa2-4764-b088-72ad45c643e4",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "Scale(factor=4)",
+                    "groups": "Keyboard&Mouse",
+                    "action": "WeaponSelect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
