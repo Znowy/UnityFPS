@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController playerController;
 
     public float moveSpeed = 10f;
-    public float jumpHeight = 3f;
+    public float jumpHeight = 1.5f;
     public bool headbob = true;
 
     public Transform groundCheck;
@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundMask;
     public Animator animator;
 
-    Vector3 playerGravityVelocity;
+    Vector3 gravityVelocity;
     Vector2 playerMovement;
 
     public bool isGrounded;
@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isGrounded)
         {
-            playerGravityVelocity.y = Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y);
+            gravityVelocity.y = Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y);
         }
     }
 
@@ -50,34 +50,44 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        //isGrounded = Physics.CheckSphere(transform.position, groundDistance, groundMask);
+        GroundCheck();
 
-        if (isGrounded && playerGravityVelocity.y < 0)
+        // Gravity
+        if (isGrounded && gravityVelocity.y < 0)
         {
-            playerGravityVelocity.y = -2f;
+            gravityVelocity.y = -2f;
         }
 
-        //Vector3 move = transform.right * playerMovement.x + transform.forward * playerMovement.y;
-
+        // Moving player
         playerController.Move(((transform.right * playerMovement.x) + (transform.forward * playerMovement.y)) * (isSprinting ? (moveSpeed * 1.5f) : moveSpeed) * Time.deltaTime);
 
         #region Headbob Animation
         if (headbob)
         {
-            if ((playerController.velocity.z != 0 || playerController.velocity.x != 0) && !animator.GetBool("Moving"))
-            {
-                animator.SetBool("Moving", true);
-            }
-            else if ((playerController.velocity.z == 0 || playerController.velocity.x == 0) && animator.GetBool("Moving"))
-            {
-                animator.SetBool("Moving", false);
-            }
+            HeadbobAnimation();
         }
         #endregion
 
-        playerGravityVelocity.y += Physics.gravity.y * Time.deltaTime;
+        gravityVelocity.y += Physics.gravity.y * Time.deltaTime;
 
-        playerController.Move(playerGravityVelocity * Time.deltaTime);
+        playerController.Move(gravityVelocity * Time.deltaTime);
+    }
+
+    void GroundCheck()
+    {
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        //isGrounded = Physics.CheckSphere(transform.position, groundDistance, groundMask);
+    }
+
+    void HeadbobAnimation()
+    {
+        if ((playerController.velocity.z != 0 || playerController.velocity.x != 0) && !animator.GetBool("Moving"))
+        {
+            animator.SetBool("Moving", true);
+        }
+        else if ((playerController.velocity.z == 0 || playerController.velocity.x == 0) && animator.GetBool("Moving"))
+        {
+            animator.SetBool("Moving", false);
+        }
     }
 }
