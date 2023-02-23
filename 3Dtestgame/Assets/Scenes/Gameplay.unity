@@ -5561,7 +5561,8 @@ MonoBehaviour:
   playerController: {fileID: 519942633}
   moveSpeed: 10
   jumpHeight: 1.5
-  headbob: 1
+  sprintModifier: 1.5
+  headbob: 0
   groundCheck: {fileID: 1956366232}
   groundDistance: 0.4
   groundMask:
