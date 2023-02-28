@@ -13,7 +13,6 @@ public class PlayerMovement : MonoBehaviour
     public bool headbob = false;
 
     public Transform groundCheck;
-    public float groundDistance = 0.4f;
     public LayerMask groundMask;
     public Animator animator;
 
@@ -82,8 +81,7 @@ public class PlayerMovement : MonoBehaviour
 
     void GroundCheck()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        //isGrounded = Physics.CheckSphere(transform.position, groundDistance, groundMask);
+        isGrounded = Physics.CheckSphere(groundCheck.position, 0.5f, groundMask);
     }
 
     void HeadbobAnimation()
